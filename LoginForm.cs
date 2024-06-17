@@ -48,44 +48,52 @@ namespace Appointment_Management_System
         {
             string targetUsername = textBox1.Text;
             string targetPassword = textBox2.Text;
+            Database.loggedIn = true;
+            Database.UserLoggedIn();
             //LINQ + Lambda
             User foundUser = users.FirstOrDefault<User>(u => u.username == targetUsername);
 
 
-
-            if (foundUser != null) {
-                if (foundUser.password == textBox2.Text)
+            try
+            {
+                if (foundUser != null)
                 {
-                    UserLogger();
-                    Database.currentUser = textBox1.Text.Trim();
-                    MainForm mainForm = new MainForm();
-                    this.Dispose();
-                    mainForm.ShowDialog();
+                    if (foundUser.password == textBox2.Text)
+                    {
+                        UserLogger();
+                        Database.currentUser = textBox1.Text.Trim();
+                        MainForm mainForm = new MainForm();
+                        this.Dispose();
+                        mainForm.ShowDialog();
+                    }
+                    else
+                    {
+                        if (culture != "pt")
+                        {
+                            MessageBox.Show("Wrong password");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Falsa senha");
+                        }
+                        return;
+                    }
                 }
                 else
                 {
                     if (culture != "pt")
                     {
-                        MessageBox.Show("Wrong password");
+                        MessageBox.Show("Wrong username");
                     }
                     else
                     {
-                        MessageBox.Show("Falsa senha");
+                        MessageBox.Show("Falsa nome de usuário");
                     }
                     return;
                 }
-            }
-            else
-            {  
-                if (culture != "pt")
-                {
-                    MessageBox.Show("Wrong username");
-                }
-                else
-                {
-                    MessageBox.Show("Falsa nome de usuário");
-                }
-                return;
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
             

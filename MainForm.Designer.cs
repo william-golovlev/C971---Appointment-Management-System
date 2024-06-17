@@ -81,6 +81,7 @@
             this.ReportsBtn.TabIndex = 6;
             this.ReportsBtn.Text = "Reports";
             this.ReportsBtn.UseVisualStyleBackColor = true;
+            this.ReportsBtn.Click += new System.EventHandler(this.ReportsBtn_Click);
             // 
             // LogoutBtn
             // 
@@ -163,6 +164,7 @@
             this.UpdateApt.TabIndex = 1;
             this.UpdateApt.Text = "Update";
             this.UpdateApt.UseVisualStyleBackColor = true;
+            this.UpdateApt.Click += new System.EventHandler(this.UpdateApt_Click);
             // 
             // DeleteApt
             // 
@@ -172,6 +174,7 @@
             this.DeleteApt.TabIndex = 2;
             this.DeleteApt.Text = "Delete";
             this.DeleteApt.UseVisualStyleBackColor = true;
+            this.DeleteApt.Click += new System.EventHandler(this.DeleteApt_Click);
             // 
             // CustomersGroupBox
             // 

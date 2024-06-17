@@ -110,12 +110,9 @@ namespace Appointment_Management_System
 
         private void LogoutBtn_Click(object sender, EventArgs e)
         {
-            //Database.AddCustomer(new Customer(4, "William Golovlev", "3", "1", DateTime.Now, "test", DateTime.Now, "test"));
-            //allCustomers = Database.GetAllCustomers();
-            //customerDataGrid.DataSource=allCustomers;
-            //customerDataGrid.Refresh();
-            
-            
+            Database.loggedIn = false;
+            Database.UserLoggedIn();
+            Application.Exit();
         }
 
         private void radioAllApts_CheckedChanged(object sender, EventArgs e)
@@ -215,6 +212,10 @@ namespace Appointment_Management_System
                     Database.AddCustomer(new Customer(Database.NextIndex("customerId", "customer"), 
                         addCustomer.CustomerName, Convert.ToInt32(Database.SingleSelectQuery($"SELECT addressId FROM address WHERE address = '{addCustomer.Address}'")), "1",
                         DateTime.Now, Database.currentUser, DateTime.Now, Database.currentUser));
+                    allCountries.Clear();
+                    allCities.Clear();
+                    allAddresses.Clear();
+                    allCustomers.Clear();
                     allCountries = Database.GetAllCountries();
                     allCities = Database.GetAllCities();
                     allAddresses = Database.getAllAddresses();
@@ -288,7 +289,15 @@ namespace Appointment_Management_System
 
                 if (modifyCustomer.ShowDialog() == DialogResult.OK)
                 {
-                    Database.UpdateTable(customer.Name, modifyCustomer.CName, modifyCustomer.Id, "customerId", "customerName", "customer");
+                    CustomerView updatedCustomer = customer;
+                    updatedCustomer.Name = modifyCustomer.CName;
+                    updatedCustomer.Address = modifyCustomer.Address;
+                    updatedCustomer.PhoneNumber = modifyCustomer.Phone;
+                    updatedCustomer.City = modifyCustomer.CityName;
+                    updatedCustomer.PostalCode = modifyCustomer.PostalCode;
+                    updatedCustomer.Country = customer.Country;
+
+                    Database.UpdateCustomer(updatedCustomer);
                     allCountries.Clear();
                     allCities.Clear();
                     allAddresses.Clear();
@@ -302,6 +311,7 @@ namespace Appointment_Management_System
                 customerDataGrid.Rows.Clear();
                 customerDataGrid.DataSource = getAllCustomerViews();
                 customerDataGrid.Refresh();
+                appointmentDataGrid.Refresh();
                 return;
             }
             else
@@ -318,7 +328,11 @@ namespace Appointment_Management_System
                 var dialogResult = MessageBox.Show($"Are you sure you want to delete the customer \"{customer.Name}\"", "Confirm", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    MessageBox.Show(customer.ID.ToString());
+                    if (!Database.SingleSelectQuery($"SELECT appointmentId FROM appointment WHERE customerId = {customer.ID}").Equals(""))
+                    {
+                        MessageBox.Show($"Cannot delete {customer.Name} when they have appointment(s)!");
+                        return;
+                    }
                     Database.DeleteCustomer(customer);
                     allCountries.Clear();
                     allCities.Clear();
@@ -337,6 +351,80 @@ namespace Appointment_Management_System
             else
             {
                 MessageBox.Show("You must select a record to delete...");
+            }
+        }
+
+        private void ReportsBtn_Click(object sender, EventArgs e)
+        {
+            ReportChoices reports = new ReportChoices();
+            reports.Show();
+        }
+
+        private void UpdateApt_Click(object sender, EventArgs e)
+        {
+            AppointmentForm modifyApt = new AppointmentForm();
+            if (appointmentDataGrid.SelectedRows.Count > 0)
+            {
+                AppointmentView apt = appointmentDataGrid.SelectedRows[0].DataBoundItem as AppointmentView;
+                modifyApt.AppointmentID = apt.ID.ToString();
+                modifyApt.Contact = apt.Contact;
+                modifyApt.Title = apt.Title;
+                modifyApt.Description = apt.Description;
+                modifyApt.Location = apt.Location;
+                modifyApt.Type = apt.Type;
+                modifyApt.URL = apt.URL;
+                modifyApt.StartTime = apt.StartTime;
+                modifyApt.EndTime = apt.EndTime;
+
+                if (modifyApt.ShowDialog() == DialogResult.OK)
+                {
+                    if (modifyApt.StartTime >= modifyApt.EndTime)
+                    {
+                        MessageBox.Show("Cannot have an appointment end before it starts! Retry later.");
+                        this.Focus();
+                    }
+                    else if (true)
+                    {
+                        allAppointments = Database.GetAllAppointments();
+                        //allAppointments.Add(addAppointment.Appointment);
+                        if (IsOverlapping(modifyApt.Appointment))
+                        {
+                            MessageBox.Show("OVERLAPPING APPOINTMENT ARE NOT ALLOWED");
+                            return;
+                        }
+                        AppointmentView updatedApt = apt;
+                        updatedApt.ID = Convert.ToInt32(modifyApt.AppointmentID);
+                        updatedApt.Contact = modifyApt.Contact;
+                        updatedApt.Title = modifyApt.Title;
+                        updatedApt.Description = modifyApt.Description;
+                        updatedApt.Location = modifyApt.Location;
+                        updatedApt.Type = modifyApt.Type;
+                        updatedApt.URL = modifyApt.URL;
+                        updatedApt.StartTime = modifyApt.StartTime;
+                        updatedApt.EndTime = modifyApt.EndTime;
+
+                        Database.ModifyAppointment(updatedApt);
+                        allAppointments.Clear();
+                        allAppointments = Database.GetAllAppointments();
+                        appointmentDataGrid.DataSource = getAllAppointViews();
+                        appointmentDataGrid.Refresh();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No appointment row selected...");
+            }
+        }
+
+        private void DeleteApt_Click(object sender, EventArgs e)
+        {
+            if (appointmentDataGrid.SelectedRows.Count > 0)
+            {
+                Database.DeleteAppointment(appointmentDataGrid.SelectedRows[0].DataBoundItem as AppointmentView);
+                allAppointments = Database.GetAllAppointments();
+                appointmentDataGrid.DataSource = getAllAppointViews();
+                appointmentDataGrid.Refresh();
             }
         }
     }

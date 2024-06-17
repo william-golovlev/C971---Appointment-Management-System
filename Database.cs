@@ -12,6 +12,7 @@ using MySql.Data;
 using System.ComponentModel;
 using System.Globalization;
 using MySqlX.XDevAPI.Relational;
+using System.Management;
 
 namespace Appointment_Management_System
 {
@@ -24,7 +25,7 @@ namespace Appointment_Management_System
         public static BindingList<Customer> customers = new BindingList<Customer>();
         public static BindingList<City> cities = new BindingList<City>();
         public static BindingList<Country> countries = new BindingList<Country>();
-
+        public static bool loggedIn = false;
 
         public static BindingList<User> GetAllUsers()
         {
@@ -401,10 +402,34 @@ namespace Appointment_Management_System
             }
         }
 
-        public static void AddAppointment(Appointment appointment)
+        public static void DeleteAppointment(AppointmentView appointment)
         {
             MySqlConnection conn = new MySqlConnection(constr);
             using (conn)
+            {
+                try
+                {
+                    conn.Open();
+                    var result = MessageBox.Show($"Are you sure you want to delete the appointment for {appointment.Contact}?", "Confirm", MessageBoxButtons.YesNo);
+                    if (result != DialogResult.Yes)
+                    {
+                        return;
+                    }
+                    String sqlString = $"DELETE FROM appointment WHERE appointmentId = {appointment.ID}";
+                    MySqlCommand cmd = new MySqlCommand(sqlString, conn);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString());
+                }
+            }
+        }
+
+        public static void AddAppointment(Appointment appointment)
+        {
+            
+            using (MySqlConnection conn = new MySqlConnection(constr))
             {
                 try
                 {
@@ -420,6 +445,159 @@ namespace Appointment_Management_System
                 {
                     MessageBox.Show(e.ToString());
                 }
+            }
+        }
+
+        public static void ModifyAppointment(AppointmentView appointment)
+        {
+            
+            using (MySqlConnection conn = new MySqlConnection(constr))
+            {
+                try
+                {
+                    conn.Open();
+                    String sqlString = $"UPDATE `appointment` SET contact = '{appointment.Contact}', title = '{appointment.Title}', " +
+                        $"description = '{appointment.Description}', location = '{appointment.Location}', type = '{appointment.Type}'," +
+                        $" url = '{appointment.URL}', start = '{appointment.StartTime.ToUniversalTime().ToString("yyyy/MM/dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo)}', end = '{appointment.EndTime.ToUniversalTime().ToString("yyyy/MM/dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo)}'," +
+                        $" lastUpdate = '{DateTime.Now.ToUniversalTime().ToString("yyyy/MM/dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo)}', lastUpdateBy = '{Database.currentUser}' WHERE appointmentId = {appointment.ID}";
+                    MySqlCommand cmd = new MySqlCommand(sqlString, conn);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    MessageBox.Show("SUCCESS+ " + rowsAffected);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+        }
+
+        public static void UpdateCity(CustomerView customer)
+        {
+            
+            using (MySqlConnection conn = new MySqlConnection(constr))
+            {
+                try
+                {
+                    conn.Open();
+                    String sqlString = $"UPDATE `address` SET cityId = {SingleSelectQuery($"SELECT cityId FROM city WHERE city = '{customer.City}'")} WHERE " +
+                        $"addressId = {SingleSelectQuery($"SELECT addressId FROM customer WHERE customerId = {customer.ID}")}";
+                    MySqlCommand cmd = new MySqlCommand(sqlString, conn);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+        }
+
+        public static void UpdateCustomer(CustomerView customer)
+        {
+            
+            using (MySqlConnection conn = new MySqlConnection(constr))
+            {
+                try
+                {
+                    conn.Open();
+                    String customerUpdate = $"UPDATE `customer` SET customerName = '{customer.Name}'," +
+                        $" lastUpdate = '{DateTime.Now.ToUniversalTime().ToString("yyyy/MM/dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo)}'," +
+                        $" lastUpdateBy = '{Database.currentUser}' WHERE customerId = {customer.ID}";
+                    MySqlCommand cmd = new MySqlCommand(customerUpdate, conn);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    String addressUpdate = $"UPDATE `address` SET address = '{customer.Address}', postalCode = '{customer.PostalCode}', " +
+                        $"lastUpdate = '{DateTime.Now.ToUniversalTime().ToString("yyyy/MM/dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo)}', lastUpdateBy = '{currentUser}' " +
+                        $"WHERE addressId = {Convert.ToInt32(SingleSelectQuery($"SELECT addressId FROM customer WHERE customerId = {Convert.ToInt32(customer.ID)}"))}";
+                    MySqlCommand cmd2 = new MySqlCommand(addressUpdate, conn);
+                    rowsAffected = cmd2.ExecuteNonQuery();
+                    MessageBox.Show(customer.City + "     " + addressUpdate);
+
+                    if (SingleSelectQuery($"SELECT * FROM city WHERE city = '{customer.City}'").Equals(""))
+                    {
+                        MessageBox.Show($"The city: \"{customer.City}\" doesn't exist. If this was intentional, create a record...");
+                    }
+                    else
+                    {
+                        UpdateCity(customer);
+                    }
+
+                    String countryUpdate = $"lastUpdate = '{DateTime.Now.ToUniversalTime().ToString("yyyy/MM/dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo)}'";
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+        }
+
+        public static void UserLoggedIn()
+        {
+            int flag;
+            if (loggedIn)
+            {
+                flag = 0;
+            }
+            else
+            {
+                flag = 1;
+            }
+            
+            using (MySqlConnection conn = new MySqlConnection(constr))
+            {
+                try
+                {
+                    conn.Open();
+                    String sqlString = $"UPDATE `user` SET active = {flag} WHERE userName = '{currentUser}'";
+                    MySqlCommand cmd = new MySqlCommand(sqlString, conn);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+        }
+
+        public static DataTable Report(int type)
+        {
+            DataTable dt = new DataTable();
+            MySqlConnection conn = new MySqlConnection(constr);
+
+            using (conn)
+            {
+                try
+                {
+                    conn.Open();
+                    String sqlString = "";
+
+                    if (type == 0)
+                    {
+                        sqlString = "SELECT MONTH(`start`) As 'Month #', COUNT(*) AS Count FROM appointment GROUP BY MONTH(`start`)";
+                    }
+                    else if (type == 1)
+                    {
+                        sqlString = "SELECT userName As 'User', COUNT(appointmentId) As Count FROM user LEFT JOIN appointment ON user.userId = appointment.userId GROUP BY userName";
+                    }
+                    else if (type == 2)
+                    {
+                        sqlString = "SELECT `type` AS Type, COUNT(*) As Count FROM appointment GROUP BY `type`";
+                    }
+                    
+
+                    MySqlCommand cmd = new MySqlCommand(sqlString, conn);
+
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                     
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(users.Count + " " + e);
+                }
+
+                return dt;
             }
         }
     }

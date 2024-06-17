@@ -89,7 +89,7 @@ namespace Appointment_Management_System
                 Customer customer = (Customer)ContactComboBox.SelectedItem;
                 return customer.name;
             }
-            set { Contact = value; } }
+            set { ContactComboBox.SelectedItem = value; } }
 
         public string Title { get { return TitleTextBox.Text; } set { TitleTextBox.Text = value; }}
         public string Description { get { return DescTextBox.Text; } set { DescTextBox.Text = value; } }
@@ -107,7 +107,7 @@ namespace Appointment_Management_System
             } 
             set 
             { 
-                StartTime = value; 
+                StartComboBox.SelectedItem = value; 
             } 
         }
         public DateTime EndTime 
@@ -119,7 +119,7 @@ namespace Appointment_Management_System
             }
             set 
             { 
-                EndTime = value; 
+                EndComboBox.SelectedItem = value; 
             } 
         }
 

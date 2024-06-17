@@ -17,6 +17,20 @@ namespace Appointment_Management_System
         {
             InitializeComponent();
             var allCountries = GetAllCountryNamesInTheWorld();
+            foreach (var country in allCountries)
+            {
+                if (country.Contains("'"))
+                {
+                    var fixedName = country.Replace("'", "''");
+                    Database.AddCountry(new Country(Database.NextIndex("countryId", "country"), fixedName, DateTime.Now,
+                        Database.currentUser, DateTime.Now, Database.currentUser));
+                }
+                else if (Database.SingleSelectQuery($"SELECT country FROM country WHERE country = '{country}'").Equals(""))
+                {
+                    Database.AddCountry(new Country(Database.NextIndex("countryId", "country"), country, DateTime.Now, 
+                        Database.currentUser, DateTime.Now, Database.currentUser));
+                }             
+            }
             CountryChoices.DataSource = allCountries;
             CountryChoices.SelectedItem = "United States";
         }
