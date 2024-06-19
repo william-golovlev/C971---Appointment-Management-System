@@ -107,7 +107,7 @@
             this.AptsGroupBox.Size = new System.Drawing.Size(1193, 238);
             this.AptsGroupBox.TabIndex = 0;
             this.AptsGroupBox.TabStop = false;
-            this.AptsGroupBox.Text = "Appointments";
+            this.AptsGroupBox.Text = "Appointments shown in local timezone, Office is located in EST timezone";
             // 
             // ShowAllApts
             // 

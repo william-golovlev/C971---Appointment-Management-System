@@ -95,8 +95,20 @@ namespace Appointment_Management_System
 
                     while (dr.Read())
                     {
+                        DateTime start = DateTime.ParseExact(Convert.ToDateTime(dr[9]).ToString("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                        DateTime localStart = TimeZoneInfo.ConvertTimeFromUtc(start, TimeZoneInfo.Local);
+
+                        DateTime end = DateTime.ParseExact(Convert.ToDateTime(dr[10]).ToString("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                        DateTime localEnd = TimeZoneInfo.ConvertTimeFromUtc(end, TimeZoneInfo.Local);
+
+                        DateTime created = DateTime.ParseExact(Convert.ToDateTime(dr[11]).ToString("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                        DateTime localCreated = TimeZoneInfo.ConvertTimeFromUtc(created, TimeZoneInfo.Local);
+
+                        DateTime updated = DateTime.ParseExact(Convert.ToDateTime(dr[13]).ToString("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                        DateTime localUpdated = TimeZoneInfo.ConvertTimeFromUtc(updated, TimeZoneInfo.Local);
+
                         appointments.Add(new Appointment(Int32.Parse(dr[0].ToString()), Int32.Parse(dr[1].ToString()), Int32.Parse(dr[2].ToString()), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(),
-                            dr[6].ToString(), dr[7].ToString(), dr[8].ToString(), Convert.ToDateTime(dr[9]), Convert.ToDateTime(dr[10]), Convert.ToDateTime(dr[11]), dr[12].ToString(), Convert.ToDateTime(dr[13]), dr[14].ToString()));
+                            dr[6].ToString(), dr[7].ToString(), dr[8].ToString(), localStart, localEnd, localCreated, dr[12].ToString(), localUpdated, dr[14].ToString()));
                     }
                 }
                 catch (Exception e)

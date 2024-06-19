@@ -54,15 +54,19 @@ namespace Appointment_Management_System
             
             if (addAppointment.ShowDialog() == DialogResult.OK)
             {
+                if (addAppointment.Description.Equals("") || addAppointment.Title.Equals("") || addAppointment.Location.Equals(""))
+                {
+                    return;
+                }
                 var apt = addAppointment.Appointment;
-                
+
                 if (addAppointment.StartTime >= addAppointment.EndTime)
                 {
                     MessageBox.Show("Cannot have an appointment end before it starts! Retry later.");
                     this.Focus();
                 }
-                else if (true)
-                {
+                
+                else {
                     allAppointments = Database.GetAllAppointments();
                     //allAppointments.Add(addAppointment.Appointment);
                     if (IsOverlapping(addAppointment.Appointment))
@@ -86,9 +90,14 @@ namespace Appointment_Management_System
 
         public bool IsOverlapping(Appointment apt)
         {
+            if (apt == null) return false;
             bool bad = false;
             foreach (var a in getAllAppointViews())
             {
+                if (a is null)
+                {
+                    continue;
+                }
                 var startstr = a.StartTime.ToUniversalTime().ToString("yyyy-mm-dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo);
                 var endstr = a.EndTime.ToUniversalTime().ToString("yyyy-mm-dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo);
                 var targetStart = apt.start.ToUniversalTime().ToString("yyyy-mm-dd HH:mm:ss", DateTimeFormatInfo.InvariantInfo);
@@ -174,6 +183,11 @@ namespace Appointment_Management_System
             addCustomer.Id = Database.NextIndex("customerId", "customer").ToString();
             if (addCustomer.ShowDialog() == DialogResult.OK)
             {
+                if (addCustomer.CName.Equals("") || addCustomer.Address.Equals("") || addCustomer.Phone.Equals("") || addCustomer.PostalCode.Equals("") || addCustomer.CityName.Equals(""))
+                {
+                    MessageBox.Show("Fill out all fields!");
+                    return;
+                }
                 if (!Database.IsInTable(addCustomer.CountryName, "country", "country"))
                 {
                     Database.AddCountry(new Country(Database.NextIndex("countryId", "country"), addCustomer.CountryName, DateTime.Now,
@@ -373,11 +387,12 @@ namespace Appointment_Management_System
                 modifyApt.Location = apt.Location;
                 modifyApt.Type = apt.Type;
                 modifyApt.URL = apt.URL;
-                modifyApt.StartTime = apt.StartTime;
-                modifyApt.EndTime = apt.EndTime;
+                modifyApt.StartTimeComboBox = apt.StartTime.ToLocalTime().ToString("HH:mm");
+                modifyApt.EndTimeComboBox = apt.EndTime.ToLocalTime().ToString("HH:mm");
 
                 if (modifyApt.ShowDialog() == DialogResult.OK)
                 {
+                    
                     if (modifyApt.StartTime >= modifyApt.EndTime)
                     {
                         MessageBox.Show("Cannot have an appointment end before it starts! Retry later.");
@@ -386,7 +401,7 @@ namespace Appointment_Management_System
                     else if (true)
                     {
                         allAppointments = Database.GetAllAppointments();
-                        //allAppointments.Add(addAppointment.Appointment);
+
                         if (IsOverlapping(modifyApt.Appointment))
                         {
                             MessageBox.Show("OVERLAPPING APPOINTMENT ARE NOT ALLOWED");

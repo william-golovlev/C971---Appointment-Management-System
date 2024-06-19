@@ -64,6 +64,14 @@ namespace Appointment_Management_System
                         Database.currentUser = textBox1.Text.Trim();
                         MainForm mainForm = new MainForm();
                         this.Dispose();
+                        DateTime warningTime = DateTime.Now.AddMinutes(15);
+                        foreach (Appointment apt in mainForm.allAppointments)
+                        {
+                            if (apt.start <= warningTime && apt.start >= DateTime.Now)
+                            {
+                                MessageBox.Show($"Appointment of ID #{apt.appointmentId} will start in 15 minutes or less!");
+                            }
+                        }
                         mainForm.ShowDialog();
                     }
                     else

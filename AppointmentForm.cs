@@ -72,7 +72,7 @@ namespace Appointment_Management_System
             {
                 string localTime = currentSlot.ToLocalTime().ToString("HH:mm");
                 timeSlots.Add(localTime);
-                currentSlot = currentSlot.AddMinutes(15);
+                currentSlot = currentSlot.AddMinutes(30);
             }
             timeSlots.Sort();
             return timeSlots;
@@ -102,7 +102,7 @@ namespace Appointment_Management_System
             get 
             {
                 
-                DateTime time = DateTime.ParseExact(StartComboBox.SelectedItem.ToString(), "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime time = DateTime.ParseExact(StartComboBox.SelectedValue.ToString(), "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
                 return new DateTime(DateTime.Now.Year, DateTime.Now.Month, getDay(StartDayCombo.SelectedIndex+1), time.Hour, time.Minute, 0);
             } 
             set 
@@ -114,7 +114,7 @@ namespace Appointment_Management_System
         {
             get
             {
-                DateTime time2 = DateTime.ParseExact(EndComboBox.SelectedItem.ToString(), "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime time2 = DateTime.ParseExact(EndComboBox.SelectedValue.ToString(), "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
                 return new DateTime(DateTime.Now.Year, DateTime.Now.Month, getDay(EndDayCombo.SelectedIndex+1), time2.Hour, time2.Minute, 0);
             }
             set 
@@ -123,9 +123,18 @@ namespace Appointment_Management_System
             } 
         }
 
+        public string StartTimeComboBox { get { return StartComboBox.SelectedItem.ToString(); } set { StartComboBox.SelectedItem = value; } }
+
+        public string EndTimeComboBox { get { return EndComboBox.SelectedItem.ToString(); } set { EndComboBox.SelectedItem = value; } }
+
         public Appointment Appointment {  get; set; }
         private void SaveBtn_Click(object sender, EventArgs e)
         {
+            if (Title.Equals("") && Description.Equals(""))
+            {
+                MessageBox.Show("Appointment MUST have a Title AND a Description.");
+                return;
+            }
             int cid = Convert.ToInt32(Database.SingleSelectQuery($"SELECT customerId FROM customer WHERE customerName = '{Contact}'"));
             int uid = Convert.ToInt32(Database.SingleSelectQuery($"SELECT userId FROM user WHERE userName = '{Database.currentUser}'"));
             Appointment = new Appointment(Convert.ToInt32(AppointmentID), 1,

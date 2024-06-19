@@ -51,6 +51,7 @@
             this.CancelBtn = new System.Windows.Forms.Button();
             this.StartDayCombo = new System.Windows.Forms.ComboBox();
             this.EndDayCombo = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -120,7 +121,7 @@
             // URLabel
             // 
             this.URLabel.AutoSize = true;
-            this.URLabel.Location = new System.Drawing.Point(24, 455);
+            this.URLabel.Location = new System.Drawing.Point(24, 449);
             this.URLabel.Name = "URLabel";
             this.URLabel.Size = new System.Drawing.Size(34, 16);
             this.URLabel.TabIndex = 7;
@@ -129,7 +130,7 @@
             // StartLabel
             // 
             this.StartLabel.AutoSize = true;
-            this.StartLabel.Location = new System.Drawing.Point(24, 522);
+            this.StartLabel.Location = new System.Drawing.Point(14, 543);
             this.StartLabel.Name = "StartLabel";
             this.StartLabel.Size = new System.Drawing.Size(68, 16);
             this.StartLabel.TabIndex = 8;
@@ -147,7 +148,7 @@
             // StartComboBox
             // 
             this.StartComboBox.FormattingEnabled = true;
-            this.StartComboBox.Location = new System.Drawing.Point(98, 519);
+            this.StartComboBox.Location = new System.Drawing.Point(98, 540);
             this.StartComboBox.Name = "StartComboBox";
             this.StartComboBox.Size = new System.Drawing.Size(174, 24);
             this.StartComboBox.TabIndex = 10;
@@ -163,7 +164,7 @@
             // 
             // UrlTextBox
             // 
-            this.UrlTextBox.Location = new System.Drawing.Point(98, 455);
+            this.UrlTextBox.Location = new System.Drawing.Point(98, 449);
             this.UrlTextBox.Name = "UrlTextBox";
             this.UrlTextBox.Size = new System.Drawing.Size(319, 22);
             this.UrlTextBox.TabIndex = 12;
@@ -238,7 +239,7 @@
             // StartDayCombo
             // 
             this.StartDayCombo.FormattingEnabled = true;
-            this.StartDayCombo.Location = new System.Drawing.Point(283, 519);
+            this.StartDayCombo.Location = new System.Drawing.Point(283, 540);
             this.StartDayCombo.Name = "StartDayCombo";
             this.StartDayCombo.Size = new System.Drawing.Size(52, 24);
             this.StartDayCombo.TabIndex = 21;
@@ -251,11 +252,21 @@
             this.EndDayCombo.Size = new System.Drawing.Size(52, 24);
             this.EndDayCombo.TabIndex = 22;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 501);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(440, 16);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "If the chosen day is (before/on) today, you will be scheduled for next week";
+            // 
             // AppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 636);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.EndDayCombo);
             this.Controls.Add(this.StartDayCombo);
             this.Controls.Add(this.CancelBtn);
@@ -311,5 +322,6 @@
         private System.Windows.Forms.Button CancelBtn;
         private System.Windows.Forms.ComboBox StartDayCombo;
         private System.Windows.Forms.ComboBox EndDayCombo;
+        private System.Windows.Forms.Label label1;
     }
 }
