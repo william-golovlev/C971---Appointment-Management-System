@@ -46,5 +46,10 @@ namespace Appointment_Management_System
         {
             this.Close();
         }
+
+        private void ReportChoices_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -108,6 +108,7 @@
             this.Controls.Add(this.button1);
             this.Name = "ReportChoices";
             this.Text = "Choose a Report";
+            this.Load += new System.EventHandler(this.ReportChoices_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

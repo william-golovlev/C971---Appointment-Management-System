@@ -584,7 +584,7 @@ namespace Appointment_Management_System
 
                     if (type == 0)
                     {
-                        sqlString = "SELECT MONTH(`start`) As 'Month #', COUNT(*) AS Count FROM appointment GROUP BY MONTH(`start`)";
+                        sqlString = "SELECT MONTHNAME(`start`) As 'Month', COUNT(*) AS Count FROM appointment GROUP BY MONTHNAME(`start`)";
                     }
                     else if (type == 1)
                     {
