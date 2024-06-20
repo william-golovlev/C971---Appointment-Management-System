@@ -121,7 +121,10 @@ namespace Appointment_Management_System
         {
             Database.loggedIn = false;
             Database.UserLoggedIn();
-            Application.Exit();
+            this.Close();
+            this.Dispose();
+            LoginForm loginAgain = new LoginForm();
+            loginAgain.ShowDialog();
         }
 
         private void radioAllApts_CheckedChanged(object sender, EventArgs e)

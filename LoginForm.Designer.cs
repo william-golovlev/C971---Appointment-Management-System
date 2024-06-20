@@ -82,9 +82,12 @@
             // Timezone
             // 
             this.Timezone.AutoSize = true;
+            this.Timezone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Timezone.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Timezone.ForeColor = System.Drawing.Color.Firebrick;
             this.Timezone.Location = new System.Drawing.Point(186, 294);
             this.Timezone.Name = "Timezone";
-            this.Timezone.Size = new System.Drawing.Size(53, 16);
+            this.Timezone.Size = new System.Drawing.Size(55, 18);
             this.Timezone.TabIndex = 5;
             this.Timezone.Text = "De/fault";
             // 

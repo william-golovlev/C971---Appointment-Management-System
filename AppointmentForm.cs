@@ -53,7 +53,7 @@ namespace Appointment_Management_System
             days.Add(DayOfWeek.Friday.ToString().Substring(0, 1));
             TypeTextComboBox.DataSource = types;
             StartDayCombo.DataSource = days;
-            EndDayCombo.DataSource = days;
+            //EndDayCombo.DataSource = days;
             
             //TimeSlots 
             
@@ -115,7 +115,7 @@ namespace Appointment_Management_System
             get
             {
                 DateTime time2 = DateTime.ParseExact(EndComboBox.SelectedValue.ToString(), "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
-                return new DateTime(DateTime.Now.Year, DateTime.Now.Month, getDay(EndDayCombo.SelectedIndex+1), time2.Hour, time2.Minute, 0);
+                return new DateTime(DateTime.Now.Year, DateTime.Now.Month, getDay(StartDayCombo.SelectedIndex+1), time2.Hour, time2.Minute, 0);
             }
             set 
             { 

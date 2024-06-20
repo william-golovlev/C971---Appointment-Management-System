@@ -68,16 +68,16 @@
             this.OtherControls.Controls.Add(this.LogoutBtn);
             this.OtherControls.Location = new System.Drawing.Point(908, 281);
             this.OtherControls.Name = "OtherControls";
-            this.OtherControls.Size = new System.Drawing.Size(286, 254);
+            this.OtherControls.Size = new System.Drawing.Size(310, 254);
             this.OtherControls.TabIndex = 4;
             this.OtherControls.TabStop = false;
             this.OtherControls.Text = "Other";
             // 
             // ReportsBtn
             // 
-            this.ReportsBtn.Location = new System.Drawing.Point(50, 64);
+            this.ReportsBtn.Location = new System.Drawing.Point(42, 55);
             this.ReportsBtn.Name = "ReportsBtn";
-            this.ReportsBtn.Size = new System.Drawing.Size(188, 51);
+            this.ReportsBtn.Size = new System.Drawing.Size(220, 51);
             this.ReportsBtn.TabIndex = 6;
             this.ReportsBtn.Text = "Reports";
             this.ReportsBtn.UseVisualStyleBackColor = true;
@@ -85,9 +85,9 @@
             // 
             // LogoutBtn
             // 
-            this.LogoutBtn.Location = new System.Drawing.Point(50, 137);
+            this.LogoutBtn.Location = new System.Drawing.Point(42, 131);
             this.LogoutBtn.Name = "LogoutBtn";
-            this.LogoutBtn.Size = new System.Drawing.Size(188, 53);
+            this.LogoutBtn.Size = new System.Drawing.Size(220, 53);
             this.LogoutBtn.TabIndex = 7;
             this.LogoutBtn.Text = "Logout";
             this.LogoutBtn.UseVisualStyleBackColor = true;
@@ -104,10 +104,10 @@
             this.AptsGroupBox.Controls.Add(this.DeleteApt);
             this.AptsGroupBox.Location = new System.Drawing.Point(17, 37);
             this.AptsGroupBox.Name = "AptsGroupBox";
-            this.AptsGroupBox.Size = new System.Drawing.Size(1193, 238);
+            this.AptsGroupBox.Size = new System.Drawing.Size(1201, 238);
             this.AptsGroupBox.TabIndex = 0;
             this.AptsGroupBox.TabStop = false;
-            this.AptsGroupBox.Text = "Appointments shown in local timezone, Office is located in EST timezone";
+            this.AptsGroupBox.Text = "Appointments";
             // 
             // ShowAllApts
             // 
@@ -125,7 +125,7 @@
             this.DateSelect.Name = "DateSelect";
             this.DateSelect.Size = new System.Drawing.Size(128, 26);
             this.DateSelect.TabIndex = 6;
-            this.DateSelect.Text = "Search for Date:";
+            this.DateSelect.Text = "Search for Date";
             this.DateSelect.UseVisualStyleBackColor = true;
             this.DateSelect.Click += new System.EventHandler(this.DateSelect_Click);
             // 

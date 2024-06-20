@@ -24,5 +24,10 @@ namespace Appointment_Management_System
         }
 
         public string Report_Name { get { return ReportName.Text; } set { ReportName.Text = value; } }
+
+        private void CloseBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -50,8 +50,8 @@
             this.SaveBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
             this.StartDayCombo = new System.Windows.Forms.ComboBox();
-            this.EndDayCombo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -76,7 +76,7 @@
             // ContactLabel
             // 
             this.ContactLabel.AutoSize = true;
-            this.ContactLabel.Location = new System.Drawing.Point(24, 129);
+            this.ContactLabel.Location = new System.Drawing.Point(24, 110);
             this.ContactLabel.Name = "ContactLabel";
             this.ContactLabel.Size = new System.Drawing.Size(52, 16);
             this.ContactLabel.TabIndex = 2;
@@ -85,7 +85,7 @@
             // AptTitleLabel
             // 
             this.AptTitleLabel.AutoSize = true;
-            this.AptTitleLabel.Location = new System.Drawing.Point(24, 189);
+            this.AptTitleLabel.Location = new System.Drawing.Point(24, 157);
             this.AptTitleLabel.Name = "AptTitleLabel";
             this.AptTitleLabel.Size = new System.Drawing.Size(33, 16);
             this.AptTitleLabel.TabIndex = 3;
@@ -94,7 +94,7 @@
             // DescLabel
             // 
             this.DescLabel.AutoSize = true;
-            this.DescLabel.Location = new System.Drawing.Point(24, 256);
+            this.DescLabel.Location = new System.Drawing.Point(17, 205);
             this.DescLabel.Name = "DescLabel";
             this.DescLabel.Size = new System.Drawing.Size(75, 16);
             this.DescLabel.TabIndex = 4;
@@ -103,7 +103,7 @@
             // LocationLabel
             // 
             this.LocationLabel.AutoSize = true;
-            this.LocationLabel.Location = new System.Drawing.Point(24, 318);
+            this.LocationLabel.Location = new System.Drawing.Point(18, 255);
             this.LocationLabel.Name = "LocationLabel";
             this.LocationLabel.Size = new System.Drawing.Size(58, 16);
             this.LocationLabel.TabIndex = 5;
@@ -112,7 +112,7 @@
             // TypeLabel
             // 
             this.TypeLabel.AutoSize = true;
-            this.TypeLabel.Location = new System.Drawing.Point(24, 387);
+            this.TypeLabel.Location = new System.Drawing.Point(18, 301);
             this.TypeLabel.Name = "TypeLabel";
             this.TypeLabel.Size = new System.Drawing.Size(39, 16);
             this.TypeLabel.TabIndex = 6;
@@ -121,7 +121,7 @@
             // URLabel
             // 
             this.URLabel.AutoSize = true;
-            this.URLabel.Location = new System.Drawing.Point(24, 449);
+            this.URLabel.Location = new System.Drawing.Point(24, 347);
             this.URLabel.Name = "URLabel";
             this.URLabel.Size = new System.Drawing.Size(34, 16);
             this.URLabel.TabIndex = 7;
@@ -130,7 +130,7 @@
             // StartLabel
             // 
             this.StartLabel.AutoSize = true;
-            this.StartLabel.Location = new System.Drawing.Point(14, 543);
+            this.StartLabel.Location = new System.Drawing.Point(17, 473);
             this.StartLabel.Name = "StartLabel";
             this.StartLabel.Size = new System.Drawing.Size(68, 16);
             this.StartLabel.TabIndex = 8;
@@ -139,7 +139,7 @@
             // EndLabel
             // 
             this.EndLabel.AutoSize = true;
-            this.EndLabel.Location = new System.Drawing.Point(24, 582);
+            this.EndLabel.Location = new System.Drawing.Point(17, 517);
             this.EndLabel.Name = "EndLabel";
             this.EndLabel.Size = new System.Drawing.Size(65, 16);
             this.EndLabel.TabIndex = 9;
@@ -148,7 +148,7 @@
             // StartComboBox
             // 
             this.StartComboBox.FormattingEnabled = true;
-            this.StartComboBox.Location = new System.Drawing.Point(98, 540);
+            this.StartComboBox.Location = new System.Drawing.Point(98, 465);
             this.StartComboBox.Name = "StartComboBox";
             this.StartComboBox.Size = new System.Drawing.Size(174, 24);
             this.StartComboBox.TabIndex = 10;
@@ -156,7 +156,7 @@
             // EndComboBox
             // 
             this.EndComboBox.FormattingEnabled = true;
-            this.EndComboBox.Location = new System.Drawing.Point(98, 579);
+            this.EndComboBox.Location = new System.Drawing.Point(98, 514);
             this.EndComboBox.Name = "EndComboBox";
             this.EndComboBox.Size = new System.Drawing.Size(174, 24);
             this.EndComboBox.TabIndex = 11;
@@ -164,7 +164,7 @@
             // 
             // UrlTextBox
             // 
-            this.UrlTextBox.Location = new System.Drawing.Point(98, 449);
+            this.UrlTextBox.Location = new System.Drawing.Point(98, 341);
             this.UrlTextBox.Name = "UrlTextBox";
             this.UrlTextBox.Size = new System.Drawing.Size(319, 22);
             this.UrlTextBox.TabIndex = 12;
@@ -173,28 +173,28 @@
             // TypeTextComboBox
             // 
             this.TypeTextComboBox.FormattingEnabled = true;
-            this.TypeTextComboBox.Location = new System.Drawing.Point(98, 387);
+            this.TypeTextComboBox.Location = new System.Drawing.Point(98, 298);
             this.TypeTextComboBox.Name = "TypeTextComboBox";
             this.TypeTextComboBox.Size = new System.Drawing.Size(210, 24);
             this.TypeTextComboBox.TabIndex = 13;
             // 
             // DescTextBox
             // 
-            this.DescTextBox.Location = new System.Drawing.Point(98, 256);
+            this.DescTextBox.Location = new System.Drawing.Point(98, 205);
             this.DescTextBox.Name = "DescTextBox";
             this.DescTextBox.Size = new System.Drawing.Size(319, 22);
             this.DescTextBox.TabIndex = 14;
             // 
             // LocationTextBox
             // 
-            this.LocationTextBox.Location = new System.Drawing.Point(98, 315);
+            this.LocationTextBox.Location = new System.Drawing.Point(98, 252);
             this.LocationTextBox.Name = "LocationTextBox";
             this.LocationTextBox.Size = new System.Drawing.Size(210, 22);
             this.LocationTextBox.TabIndex = 15;
             // 
             // TitleTextBox
             // 
-            this.TitleTextBox.Location = new System.Drawing.Point(98, 189);
+            this.TitleTextBox.Location = new System.Drawing.Point(98, 154);
             this.TitleTextBox.Name = "TitleTextBox";
             this.TitleTextBox.Size = new System.Drawing.Size(210, 22);
             this.TitleTextBox.TabIndex = 16;
@@ -202,7 +202,7 @@
             // ContactComboBox
             // 
             this.ContactComboBox.FormattingEnabled = true;
-            this.ContactComboBox.Location = new System.Drawing.Point(98, 126);
+            this.ContactComboBox.Location = new System.Drawing.Point(98, 107);
             this.ContactComboBox.Name = "ContactComboBox";
             this.ContactComboBox.Size = new System.Drawing.Size(210, 24);
             this.ContactComboBox.TabIndex = 17;
@@ -218,7 +218,7 @@
             // SaveBtn
             // 
             this.SaveBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.SaveBtn.Location = new System.Drawing.Point(378, 533);
+            this.SaveBtn.Location = new System.Drawing.Point(378, 536);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(114, 37);
             this.SaveBtn.TabIndex = 19;
@@ -239,35 +239,36 @@
             // StartDayCombo
             // 
             this.StartDayCombo.FormattingEnabled = true;
-            this.StartDayCombo.Location = new System.Drawing.Point(283, 540);
+            this.StartDayCombo.Location = new System.Drawing.Point(288, 465);
             this.StartDayCombo.Name = "StartDayCombo";
             this.StartDayCombo.Size = new System.Drawing.Size(52, 24);
             this.StartDayCombo.TabIndex = 21;
             // 
-            // EndDayCombo
-            // 
-            this.EndDayCombo.FormattingEnabled = true;
-            this.EndDayCombo.Location = new System.Drawing.Point(283, 579);
-            this.EndDayCombo.Name = "EndDayCombo";
-            this.EndDayCombo.Size = new System.Drawing.Size(52, 24);
-            this.EndDayCombo.TabIndex = 22;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 501);
+            this.label1.Location = new System.Drawing.Point(24, 419);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(440, 16);
+            this.label1.Size = new System.Drawing.Size(451, 16);
             this.label1.TabIndex = 23;
-            this.label1.Text = "If the chosen day is (before/on) today, you will be scheduled for next week";
+            this.label1.Text = "-- If the chosen day is (before/on) today, you will be scheduled for next week";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(24, 435);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(258, 16);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "-- All times are EST converted to local time";
             // 
             // AppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 636);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.EndDayCombo);
             this.Controls.Add(this.StartDayCombo);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.SaveBtn);
@@ -321,7 +322,7 @@
         private System.Windows.Forms.Button SaveBtn;
         private System.Windows.Forms.Button CancelBtn;
         private System.Windows.Forms.ComboBox StartDayCombo;
-        private System.Windows.Forms.ComboBox EndDayCombo;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -23,6 +23,7 @@ namespace Appointment_Management_System
             culture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
             InitializeComponent();
             this.CenterToScreen();
+            this.AcceptButton = LoginBtn;
             string culture_fullname = CultureInfo.CurrentCulture.Name;
             LocalTimezone = TimeZone.CurrentTimeZone.StandardName;
             if (culture == "pt") ChangeLanguage();

@@ -41,5 +41,10 @@ namespace Appointment_Management_System
             report.Report_Name = "Appointments By Type";
             report.Show();
         }
+
+        private void CloseBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

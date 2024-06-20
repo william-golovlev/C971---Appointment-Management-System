@@ -30,6 +30,7 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ReportName = new System.Windows.Forms.Label();
+            this.CloseBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,7 +41,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(274, 222);
+            this.dataGridView1.Size = new System.Drawing.Size(412, 222);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -54,11 +55,22 @@
             this.ReportName.TabIndex = 1;
             this.ReportName.Text = "Report Name Here";
             // 
+            // CloseBtn
+            // 
+            this.CloseBtn.Location = new System.Drawing.Point(420, 12);
+            this.CloseBtn.Name = "CloseBtn";
+            this.CloseBtn.Size = new System.Drawing.Size(75, 23);
+            this.CloseBtn.TabIndex = 2;
+            this.CloseBtn.Text = "Close";
+            this.CloseBtn.UseVisualStyleBackColor = true;
+            this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
+            // 
             // Report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(370, 292);
+            this.ClientSize = new System.Drawing.Size(507, 292);
+            this.Controls.Add(this.CloseBtn);
             this.Controls.Add(this.ReportName);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Report";
@@ -73,5 +85,6 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label ReportName;
+        private System.Windows.Forms.Button CloseBtn;
     }
 }
